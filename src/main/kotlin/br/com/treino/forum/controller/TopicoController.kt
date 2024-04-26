@@ -1,6 +1,7 @@
 package br.com.treino.forum.controller
 import br.com.treino.forum.dto.AtualizaTopicoForm
 import br.com.treino.forum.dto.NovoTopicoForm
+import br.com.treino.forum.dto.TopicoPorCategoriaDto
 import br.com.treino.forum.dto.TopicoView
 
 import br.com.treino.forum.service.TopicoService
@@ -74,5 +75,10 @@ class TopicoController(private val service:TopicoService) {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deletar(@PathVariable id:Long) {
         service.deletar(id)
+    }
+
+    @GetMapping("/relatorio")
+    fun relatorio() : List<TopicoPorCategoriaDto> {
+        return service.relatorio()
     }
 }

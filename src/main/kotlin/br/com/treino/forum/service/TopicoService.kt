@@ -2,6 +2,7 @@ package br.com.treino.forum.service
 
 import br.com.treino.forum.dto.AtualizaTopicoForm
 import br.com.treino.forum.dto.NovoTopicoForm
+import br.com.treino.forum.dto.TopicoPorCategoriaDto
 import br.com.treino.forum.dto.TopicoView
 import br.com.treino.forum.exception.NotFoundException
 import br.com.treino.forum.mapper.TopicoFormMapper
@@ -10,6 +11,7 @@ import br.com.treino.forum.model.Curso
 import br.com.treino.forum.model.Topico
 import br.com.treino.forum.model.Usuario
 import br.com.treino.forum.repository.TopicoRepository
+import jakarta.persistence.EntityManager
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
@@ -22,7 +24,8 @@ class TopicoService(
 
     private val topicoViewMapper: TopicoViewMapper,
     private val topicoFormMapper: TopicoFormMapper,
-    private val notFoundMessage: String = "Tópico não encontrado"
+    private val notFoundMessage: String = "Tópico não encontrado",
+    private val em: EntityManager
 
     ) {
 
@@ -69,6 +72,10 @@ class TopicoService(
 
     fun deletar(id:Long) {
         repository.deleteById(id)
+    }
+
+    fun relatorio() : List<TopicoPorCategoriaDto> {
+       return repository.relatorio()
     }
 
 }
