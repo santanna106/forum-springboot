@@ -22,7 +22,7 @@ class UserController(private val service: UsuarioService){
     @Cacheable("usuarios")
     fun listar(
         @RequestParam(required = false) nomeUsuario:String?,
-        @PageableDefault(size = 20,sort = ["dataCriacao"], direction = Sort.Direction.DESC) paginacao: Pageable
+        @PageableDefault(size = 20,sort = ["nome"], direction = Sort.Direction.DESC) paginacao: Pageable
     ) : Page<UsuarioView> {
         return service.listar(nomeUsuario,paginacao)
     }
